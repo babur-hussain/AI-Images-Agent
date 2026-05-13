@@ -1021,26 +1021,35 @@
     },
     {
       "parameters": {
-        "node": "={{ $('Merge Context').first().json.ig_node_id }}",
-        "graphApiVersion": "v25.0",
-        "imageUrl": "={{ $('Merge Context').first().json.previewImageUrl }}",
-        "caption": "=\ud83c\udfea {{ $('Merge Context').first().json.business_name }} - {{ $('Merge Context').first().json.location }}\n\ud83d\udcde {{ $('Merge Context').first().json.phone_display }}",
-        "additionalFields": {}
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v25.0/{{ $('Merge Context').first().json.ig_node_id }}/media",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "image_url",
+              "value": "={{ $('Merge Context').first().json.previewImageUrl }}"
+            },
+            {
+              "name": "caption",
+              "value": "=\ud83c\udfea {{ $('Merge Context').first().json.business_name }} - {{ $('Merge Context').first().json.location }}\n\ud83d\udcde {{ $('Merge Context').first().json.phone_display }}"
+            },
+            {
+              "name": "access_token",
+              "value": "={{ $('Merge Context').first().json.fb_access_token }}"
+            }
+          ]
+        },
+        "options": {}
       },
-      "type": "@mookielianhd/n8n-nodes-instagram.instagram",
-      "typeVersion": 1,
+      "id": "888f5fcd-8607-405a-9fbf-f9f41437af02",
+      "name": "Publish: Instagram",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
       "position": [
         38048,
         45664
-      ],
-      "id": "888f5fcd-8607-405a-9fbf-f9f41437af02",
-      "name": "Publish: Instagram",
-      "credentials": {
-        "instagramApi": {
-          "id": "7MwIGchVTqOxa9K3",
-          "name": "Instagram account"
-        }
-      }
+      ]
     },
     {
       "parameters": {
@@ -1654,6 +1663,34 @@
         37552,
         46352
       ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v25.0/{{ $('Merge Context').first().json.ig_node_id }}/media_publish",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "creation_id",
+              "value": "={{ $json.id }}"
+            },
+            {
+              "name": "access_token",
+              "value": "={{ $('Merge Context').first().json.fb_access_token }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "ig-publish-step2-001",
+      "name": "IG: Publish Container",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        38348,
+        45664
+      ]
     }
   ],
   "pinData": {},
@@ -2062,7 +2099,7 @@
       "main": [
         [
           {
-            "node": "PG: Close Session",
+            "node": "IG: Publish Container",
             "type": "main",
             "index": 0
           }
@@ -2301,6 +2338,17 @@
         [
           {
             "node": "Prepare Content Planner",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IG: Publish Container": {
+      "main": [
+        [
+          {
+            "node": "PG: Close Session",
             "type": "main",
             "index": 0
           }
