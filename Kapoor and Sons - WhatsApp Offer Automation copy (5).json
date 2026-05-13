@@ -53,7 +53,10 @@
           "id": "jZXKnnaPvqPAP4VN",
           "name": "kapoor&sons"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -97,7 +100,10 @@
       "position": [
         37760,
         44256
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -181,7 +187,10 @@
           "id": "jZXKnnaPvqPAP4VN",
           "name": "kapoor&sons"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -194,7 +203,10 @@
       "position": [
         37088,
         45184
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -474,7 +486,10 @@
           "id": "jZXKnnaPvqPAP4VN",
           "name": "kapoor&sons"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -505,7 +520,10 @@
       "position": [
         38048,
         45056
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -528,7 +546,10 @@
       "position": [
         37760,
         45280
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -557,7 +578,10 @@
       "position": [
         38048,
         45280
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -592,7 +616,10 @@
       "position": [
         38400,
         45280
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -627,7 +654,10 @@
           "id": "jZXKnnaPvqPAP4VN",
           "name": "kapoor&sons"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -658,7 +688,10 @@
       "position": [
         39584,
         45280
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -693,7 +726,10 @@
           "id": "jZXKnnaPvqPAP4VN",
           "name": "kapoor&sons"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -724,7 +760,10 @@
       "position": [
         38400,
         45472
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -745,7 +784,10 @@
           "id": "jZXKnnaPvqPAP4VN",
           "name": "kapoor&sons"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -802,7 +844,10 @@
       "position": [
         39136,
         45968
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -853,7 +898,10 @@
       "position": [
         39808,
         45888
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -919,7 +967,10 @@
           "id": "jZXKnnaPvqPAP4VN",
           "name": "kapoor&sons"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -950,7 +1001,10 @@
       "position": [
         40704,
         45968
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -981,7 +1035,10 @@
       "position": [
         41152,
         45968
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -1017,7 +1074,10 @@
       "position": [
         37760,
         45664
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -1049,7 +1109,10 @@
       "position": [
         38048,
         45664
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -1070,7 +1133,10 @@
           "id": "jZXKnnaPvqPAP4VN",
           "name": "kapoor&sons"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -1101,7 +1167,10 @@
       "position": [
         38688,
         45664
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -1132,7 +1201,10 @@
       "position": [
         37760,
         46160
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -1153,7 +1225,10 @@
           "id": "jZXKnnaPvqPAP4VN",
           "name": "kapoor&sons"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -1184,7 +1259,10 @@
       "position": [
         38048,
         46640
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -1228,7 +1306,10 @@
       "position": [
         38912,
         46352
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -1265,7 +1346,10 @@
           "id": "jZXKnnaPvqPAP4VN",
           "name": "kapoor&sons"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -1319,7 +1403,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{ $('Merge Context').first().json.from }}\",\n  \"type\": \"interactive\",\n  \"interactive\": {\n    \"type\": \"button\",\n    \"body\": {\n      \"text\": \"\ud83d\udc4b Welcome to *Kapoor & Sons*!\\n\\nBetul's oldest electronics showroom since 1988.\\n\\nWhat would you like to do today?\"\n    },\n    \"action\": {\n      \"buttons\": [\n        { \"type\": \"reply\", \"reply\": { \"id\": \"create_offer\", \"title\": \"\ud83d\udce2 Create Offer\" } },\n        { \"type\": \"reply\", \"reply\": { \"id\": \"content_planner\", \"title\": \"\ud83d\udcc5 Content Planner\" } },\n        { \"type\": \"reply\", \"reply\": { \"id\": \"skip_today\", \"title\": \"\u23ed Skip Today\" } }\n      ]\n    }\n  }\n}",
+        "jsonBody": "={\n  \"messaging_product\": \"whatsapp\",\n  \"to\": \"{{ $('Merge Context').first().json.from }}\",\n  \"type\": \"interactive\",\n  \"interactive\": {\n    \"type\": \"button\",\n    \"body\": {\n      \"text\": \"\ud83d\udc4b Welcome to *{{ $('Merge Context').first().json.business_name }}*!\\n\\n{{ $('Merge Context').first().json.tagline || $('Merge Context').first().json.brand_positioning || 'Your trusted partner' }}\\n\\nWhat would you like to do today?\"\n    },\n    \"action\": {\n      \"buttons\": [\n        { \"type\": \"reply\", \"reply\": { \"id\": \"create_offer\", \"title\": \"\ud83d\udce2 Create Offer\" } },\n        { \"type\": \"reply\", \"reply\": { \"id\": \"content_planner\", \"title\": \"\ud83d\udcc5 Content Planner\" } },\n        { \"type\": \"reply\", \"reply\": { \"id\": \"skip_today\", \"title\": \"\u23ed Skip Today\" } }\n      ]\n    }\n  }\n}",
         "options": {}
       },
       "id": "85f6a60e-e764-4ba5-827d-68c2c3c85559",
@@ -1329,7 +1413,10 @@
       "position": [
         37760,
         44704
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -1360,7 +1447,10 @@
       "position": [
         37088,
         44256
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -1394,7 +1484,10 @@
           "id": "jZXKnnaPvqPAP4VN",
           "name": "kapoor&sons"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -1415,7 +1508,10 @@
           "id": "jZXKnnaPvqPAP4VN",
           "name": "kapoor&sons"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -1436,7 +1532,10 @@
           "id": "jZXKnnaPvqPAP4VN",
           "name": "kapoor&sons"
         }
-      }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -1662,7 +1761,10 @@
       "position": [
         37552,
         46352
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     },
     {
       "parameters": {
@@ -1690,7 +1792,10 @@
       "position": [
         38348,
         45664
-      ]
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000
     }
   ],
   "pinData": {},
