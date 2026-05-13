@@ -1403,7 +1403,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({  messaging_product: 'whatsapp',  to: $('Merge Context').first().json.from,  type: 'interactive',  interactive: {    type: 'button',    body: { text: $('Merge Context').first().json.welcome_text },    action: {      buttons: [        { type: 'reply', reply: { id: 'create_offer', title: '\ud83d\udce2 Create Offer' } },        { type: 'reply', reply: { id: 'content_planner', title: '\ud83d\udcc5 Content Planner' } },        { type: 'reply', reply: { id: 'skip_today', title: '\u23ed Skip Today' } }      ]    }  }}) }}",
+        "jsonBody": "={{ $json.welcomeBody }}",
         "options": {}
       },
       "id": "85f6a60e-e764-4ba5-827d-68c2c3c85559",
@@ -1411,8 +1411,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4,
       "position": [
-        37760,
-        44704
+        38080,
+        44500
       ],
       "retryOnFail": true,
       "maxTries": 3,
@@ -1798,6 +1798,19 @@
       "retryOnFail": true,
       "maxTries": 3,
       "waitBetweenTries": 1000
+    },
+    {
+      "parameters": {
+        "jsCode": "const ctx = $('Merge Context').first().json;\nconst body = {\n  messaging_product: 'whatsapp',\n  to: ctx.from,\n  type: 'interactive',\n  interactive: {\n    type: 'button',\n    body: { text: ctx.welcome_text },\n    action: {\n      buttons: [\n        { type: 'reply', reply: { id: 'create_offer', title: '\\ud83d\\udce2 Create Offer' } },\n        { type: 'reply', reply: { id: 'content_planner', title: '\\ud83d\\udcc5 Content Planner' } },\n        { type: 'reply', reply: { id: 'skip_today', title: '\\u23ed Skip Today' } }\n      ]\n    }\n  }\n};\nreturn [{ json: { welcomeBody: JSON.stringify(body) } }];"
+      },
+      "id": "build-welcome-body-001",
+      "name": "Build Welcome Body",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        37760,
+        44500
+      ]
     }
   ],
   "pinData": {},
@@ -2456,6 +2469,17 @@
         [
           {
             "node": "PG: Close Session",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Welcome Body": {
+      "main": [
+        [
+          {
+            "node": "Send: Welcome Menu",
             "type": "main",
             "index": 0
           }
