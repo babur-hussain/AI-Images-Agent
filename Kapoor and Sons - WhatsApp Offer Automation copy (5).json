@@ -170,7 +170,7 @@
     {
       "parameters": {
         "operation": "executeQuery",
-        "query": "SELECT s.session_id, s.status, s.preview_image_url, s.client_id, c.client_id as cid, c.business_name, c.tagline, c.established_year, c.location, c.brand_category, c.brand_positioning, c.phone_primary, c.phone_display, c.wa_phone_id, c.wa_token, c.fb_page_id, c.fb_access_token, c.ig_node_id, c.ig_credential_id, c.kie_api_key, c.imgbb_api_key, c.serp_api_key, c.calendarific_api_key, c.prompt_poster, c.prompt_enhance, c.prompt_planner, c.prompt_morning, c.prompt_welcome FROM ks_sessions s JOIN ks_clients c ON c.wa_phone_id = '{{ $json.businessPhoneId }}' WHERE s.phone = '{{ $json.from }}' AND s.status NOT IN ('closed', 'skip') ORDER BY s.created_at DESC LIMIT 1;",
+        "query": "SELECT s.session_id, s.status, s.preview_image_url, c.client_id as cid, c.business_name, c.tagline, c.established_year, c.location, c.brand_category, c.brand_positioning, c.phone_primary, c.phone_display, c.wa_phone_id, c.wa_token, c.fb_page_id, c.fb_access_token, c.ig_node_id, c.ig_credential_id, c.kie_api_key, c.imgbb_api_key, c.serp_api_key, c.calendarific_api_key, c.prompt_poster, c.prompt_enhance, c.prompt_planner, c.prompt_morning, c.prompt_welcome FROM ks_clients c LEFT JOIN ks_sessions s ON s.phone = '{{ $json.from }}' AND s.status NOT IN ('closed', 'skip') WHERE c.wa_phone_id = '{{ $json.businessPhoneId }}' ORDER BY s.created_at DESC LIMIT 1;",
         "options": {}
       },
       "id": "254ed189-bfe0-43ca-8627-8ab73f638639",
