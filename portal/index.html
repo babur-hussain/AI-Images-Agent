@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WhatsApp Automation Hub</title>
+  <link rel="stylesheet" href="index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+  <div class="bg-mesh"><div class="bg-orb bg-orb-1"></div><div class="bg-orb bg-orb-2"></div><div class="bg-orb bg-orb-3"></div></div>
+
+  <!-- LOGIN -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="logo-icon"><i class="fa-brands fa-whatsapp"></i></div>
+        <h1>Automation Hub</h1>
+        <p class="login-subtitle">WhatsApp Business Automation Platform</p>
+      </div>
+
+      <div id="auth-forms">
+        <!-- Sign In -->
+        <form id="signin-form" autocomplete="off">
+          <div class="form-group"><label>Email</label><div class="input-wrapper"><i class="fa-solid fa-envelope"></i><input type="email" id="si-email" placeholder="you@email.com" required></div></div>
+          <div class="form-group"><label>Password</label><div class="input-wrapper"><i class="fa-solid fa-lock"></i><input type="password" id="si-password" placeholder="Password" required><button type="button" class="toggle-pw" onclick="togglePassword('si-password',this)"><i class="fa-solid fa-eye"></i></button></div></div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block" id="signin-btn"><span>Sign In</span><i class="fa-solid fa-arrow-right"></i></button>
+          <p class="auth-switch">Don't have an account? <a href="#" onclick="toggleAuthMode(event)">Sign Up</a></p>
+        </form>
+        <!-- Sign Up -->
+        <form id="signup-form" style="display:none" autocomplete="off">
+          <div class="form-group"><label>Email</label><div class="input-wrapper"><i class="fa-solid fa-envelope"></i><input type="email" id="su-email" placeholder="you@email.com" required></div></div>
+          <div class="form-group"><label>Password (min 6 chars)</label><div class="input-wrapper"><i class="fa-solid fa-lock"></i><input type="password" id="su-password" placeholder="Create password" required minlength="6"><button type="button" class="toggle-pw" onclick="togglePassword('su-password',this)"><i class="fa-solid fa-eye"></i></button></div></div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block" id="signup-btn"><span>Create Account</span><i class="fa-solid fa-arrow-right"></i></button>
+          <p class="auth-switch">Already have an account? <a href="#" onclick="toggleAuthMode(event)">Sign In</a></p>
+        </form>
+      </div>
+      <div class="divider"><span>or</span></div>
+      <button class="btn btn-ghost btn-lg btn-block" id="google-btn" onclick="googleSignIn()"><i class="fa-brands fa-google"></i>Continue with Google</button>
+      <p id="login-error" class="form-error" style="display:none"></p>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div id="app" class="app" style="display:none">
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-brand"><div class="brand-icon"><i class="fa-brands fa-whatsapp"></i></div><div class="brand-text"><span class="brand-name">AutoHub</span><span class="brand-sub" id="user-email-display">Admin</span></div></div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-view="dashboard" id="nav-dashboard"><i class="fa-solid fa-grid-2"></i><span>Dashboard</span></a>
+        <a href="#" class="nav-item" data-view="add-client" id="nav-add-client"><i class="fa-solid fa-user-plus"></i><span>Add Client</span></a>
+        <a href="#" class="nav-item" data-view="settings" id="nav-settings"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+      </nav>
+      <div class="sidebar-footer"><button class="btn btn-ghost btn-sm" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button></div>
+    </aside>
+    <main id="main-content" class="main-content">
+      <!-- DASHBOARD -->
+      <section id="view-dashboard" class="view active">
+        <div class="view-header"><div><h2>Dashboard</h2><p class="view-subtitle">Manage your automation clients</p></div><button class="btn btn-primary" onclick="showView('add-client')"><i class="fa-solid fa-plus"></i>Add Client</button></div>
+        <div class="stats-grid" id="stats-grid">
+          <div class="stat-card"><div class="stat-icon" style="--clr:#6366f1"><i class="fa-solid fa-users"></i></div><div class="stat-info"><span class="stat-value" id="stat-total">0</span><span class="stat-label">Total Clients</span></div></div>
+          <div class="stat-card"><div class="stat-icon" style="--clr:#10b981"><i class="fa-solid fa-circle-check"></i></div><div class="stat-info"><span class="stat-value" id="stat-active">0</span><span class="stat-label">Active</span></div></div>
+          <div class="stat-card"><div class="stat-icon" style="--clr:#f59e0b"><i class="fa-solid fa-circle-pause"></i></div><div class="stat-info"><span class="stat-value" id="stat-inactive">0</span><span class="stat-label">Inactive</span></div></div>
+        </div>
+        <div class="section-header"><h3>Registered Clients</h3><div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="client-search" placeholder="Search clients..." oninput="filterClients()"></div></div>
+        <div id="clients-grid" class="clients-grid"><div class="empty-state"><i class="fa-solid fa-store"></i><h4>No clients yet</h4><p>Add your first client to get started</p><button class="btn btn-primary" onclick="showView('add-client')"><i class="fa-solid fa-plus"></i>Add Client</button></div></div>
+      </section>
+
+      <!-- ADD/EDIT CLIENT -->
+      <section id="view-add-client" class="view">
+        <div class="view-header"><div><h2 id="form-title">Register New Client</h2><p class="view-subtitle" id="form-subtitle">Complete all steps to configure automation</p></div><button class="btn btn-ghost" onclick="showView('dashboard')"><i class="fa-solid fa-arrow-left"></i>Back</button></div>
+        <div class="wizard-progress">
+          <div class="wizard-step active" data-step="1"><span class="step-num">1</span><span class="step-label">Business</span></div><div class="wizard-connector"></div>
+          <div class="wizard-step" data-step="2"><span class="step-num">2</span><span class="step-label">APIs</span></div><div class="wizard-connector"></div>
+          <div class="wizard-step" data-step="3"><span class="step-num">3</span><span class="step-label">Services</span></div><div class="wizard-connector"></div>
+          <div class="wizard-step" data-step="4"><span class="step-num">4</span><span class="step-label">Branding</span></div><div class="wizard-connector"></div>
+          <div class="wizard-step" data-step="5"><span class="step-num">5</span><span class="step-label">Prompts</span></div>
+        </div>
+        <form id="client-form" autocomplete="off">
+          <input type="hidden" id="edit-client-id" value="">
+          <!-- STEP 1 -->
+          <div class="form-step active" data-step="1"><div class="step-card"><h3><i class="fa-solid fa-building"></i>Business Profile</h3><div class="form-grid">
+            <div class="form-group full"><label for="cf-business-name">Business Name *</label><input type="text" id="cf-business-name" placeholder="e.g. Kapoor & Sons" required></div>
+            <div class="form-group"><label for="cf-tagline">Tagline</label><input type="text" id="cf-tagline" placeholder="e.g. A Trusted Name Since 1977"></div>
+            <div class="form-group"><label for="cf-established">Established Year</label><input type="text" id="cf-established" placeholder="e.g. 1977"></div>
+            <div class="form-group"><label for="cf-location">Location</label><input type="text" id="cf-location" placeholder="e.g. Betul, MP"></div>
+            <div class="form-group"><label for="cf-category">Category</label><select id="cf-category"><option value="electronics">Electronics</option><option value="clothing">Clothing</option><option value="food">Food</option><option value="jewelry">Jewelry</option><option value="furniture">Furniture</option><option value="general">General</option><option value="other">Other</option></select></div>
+            <div class="form-group full"><label for="cf-positioning">Brand Description</label><textarea id="cf-positioning" rows="3" placeholder="Brief description for AI content..."></textarea></div>
+          </div></div></div>
+          <!-- STEP 2 -->
+          <div class="form-step" data-step="2"><div class="step-card"><h3><i class="fa-brands fa-whatsapp"></i>WhatsApp Business API</h3><div class="form-grid">
+            <div class="form-group"><label for="cf-phone-primary">WhatsApp Phone *</label><input type="text" id="cf-phone-primary" placeholder="919203580338" required></div>
+            <div class="form-group"><label for="cf-phone-display">Display Phone</label><input type="text" id="cf-phone-display" placeholder="7697551111"></div>
+            <div class="form-group"><label for="cf-wa-phone-id">WA Phone ID *</label><input type="text" id="cf-wa-phone-id" placeholder="1054458951093025" required></div>
+            <div class="form-group full"><label for="cf-wa-token">WA Bearer Token *</label><div class="input-wrapper"><input type="password" id="cf-wa-token" required placeholder="EAARHnoiO6Gc..."><button type="button" class="toggle-pw" onclick="togglePassword('cf-wa-token',this)"><i class="fa-solid fa-eye"></i></button></div></div>
+          </div></div>
+          <div class="step-card"><h3><i class="fa-brands fa-facebook"></i>Facebook</h3><div class="form-grid">
+            <div class="form-group"><label for="cf-fb-page-id">Page ID</label><input type="text" id="cf-fb-page-id" placeholder="971861779351791"></div>
+            <div class="form-group full"><label for="cf-fb-token">Page Access Token</label><div class="input-wrapper"><input type="password" id="cf-fb-token" placeholder="EAAXNCSO50Wk..."><button type="button" class="toggle-pw" onclick="togglePassword('cf-fb-token',this)"><i class="fa-solid fa-eye"></i></button></div></div>
+          </div></div>
+          <div class="step-card"><h3><i class="fa-brands fa-instagram"></i>Instagram</h3><div class="form-grid">
+            <div class="form-group"><label for="cf-ig-node-id">Business Account ID</label><input type="text" id="cf-ig-node-id" placeholder="17841453240936127"></div>
+            <div class="form-group full"><label for="cf-ig-credential-id">Access Token / Credential ID</label><div class="input-wrapper"><input type="password" id="cf-ig-credential-id" placeholder="7MwIGchVTqOxa9K3"><button type="button" class="toggle-pw" onclick="togglePassword('cf-ig-credential-id',this)"><i class="fa-solid fa-eye"></i></button></div></div>
+          </div></div></div>
+          <!-- STEP 3 -->
+          <div class="form-step" data-step="3"><div class="step-card"><h3><i class="fa-solid fa-wand-magic-sparkles"></i>Image Generation</h3><div class="form-grid">
+            <div class="form-group full"><label for="cf-kie-key">KIE.ai API Key *</label><div class="input-wrapper"><input type="password" id="cf-kie-key" required placeholder="KIE key"><button type="button" class="toggle-pw" onclick="togglePassword('cf-kie-key',this)"><i class="fa-solid fa-eye"></i></button></div></div>
+            <div class="form-group full"><label for="cf-imgbb-key">ImgBB API Key *</label><div class="input-wrapper"><input type="password" id="cf-imgbb-key" required placeholder="ImgBB key"><button type="button" class="toggle-pw" onclick="togglePassword('cf-imgbb-key',this)"><i class="fa-solid fa-eye"></i></button></div></div>
+          </div></div>
+          <div class="step-card"><h3><i class="fa-solid fa-robot"></i>AI Services</h3><div class="form-grid">
+            <div class="form-group"><label for="cf-serp-key">SerpAPI Key</label><div class="input-wrapper"><input type="password" id="cf-serp-key" placeholder="SerpAPI key"><button type="button" class="toggle-pw" onclick="togglePassword('cf-serp-key',this)"><i class="fa-solid fa-eye"></i></button></div></div>
+            <div class="form-group"><label for="cf-calendar-key">Calendarific Key</label><div class="input-wrapper"><input type="password" id="cf-calendar-key" placeholder="Calendar key"><button type="button" class="toggle-pw" onclick="togglePassword('cf-calendar-key',this)"><i class="fa-solid fa-eye"></i></button></div></div>
+          </div></div></div>
+
+          <div class="step-card"><h3><i class="fa-solid fa-clock"></i>Schedule</h3><div class="form-grid">
+            <div class="form-group"><label for="cf-cron">Daily Cron</label><input type="text" id="cf-cron" value="0 12 * * 1-6"><small class="form-hint">12 PM Mon–Sat</small></div>
+            <div class="form-group"><label for="cf-timezone">Timezone</label><select id="cf-timezone"><option value="Asia/Kolkata" selected>Asia/Kolkata</option><option value="Asia/Dubai">Asia/Dubai</option><option value="America/New_York">America/New_York</option><option value="Europe/London">Europe/London</option></select></div>
+          </div></div></div>
+          <!-- STEP 4: SYSTEM PROMPTS -->
+          <div class="form-step" data-step="4"><div class="step-card"><h3><i class="fa-solid fa-terminal"></i>System Prompts</h3><p class="form-hint" style="margin-bottom:20px">Customize all AI prompts. Leave blank to use smart defaults.</p>
+            <details class="prompt-section"><summary>📸 Poster Generation — Master Prompt</summary><textarea id="cf-prompt-poster" rows="10" placeholder="The main prompt used to generate offer posters via AI image generation. Controls layout, branding, typography, product placement, etc."></textarea></details>
+            <details class="prompt-section"><summary>✨ Prompt Enhancement — System Message</summary><textarea id="cf-prompt-enhance" rows="10" placeholder="System message for the AI that enhances/refines the poster generation prompt before sending to image generator."></textarea></details>
+            <details class="prompt-section"><summary>📅 Content Planner — System Message</summary><textarea id="cf-prompt-planner" rows="10" placeholder="System message for the AI content planner agent that creates daily content ideas, captions, and posting schedules."></textarea></details>
+            <details class="prompt-section"><summary>🌅 Morning Message Template</summary><textarea id="cf-prompt-morning" rows="5" placeholder="Template for the daily WhatsApp morning message. Use {{contentIdea}}, {{festivalHint}} as placeholders."></textarea></details>
+            <details class="prompt-section"><summary>👋 Welcome Message Template</summary><textarea id="cf-prompt-welcome" rows="5" placeholder="Template for the welcome message sent when a new user starts. Use {{business_name}} as placeholder."></textarea></details>
+          </div></div>
+          <div class="wizard-nav">
+            <button type="button" class="btn btn-ghost" id="btn-prev" onclick="wizardPrev()" style="display:none"><i class="fa-solid fa-arrow-left"></i>Previous</button>
+            <div class="wizard-nav-spacer"></div>
+            <button type="button" class="btn btn-primary" id="btn-next" onclick="wizardNext()">Next<i class="fa-solid fa-arrow-right"></i></button>
+            <button type="submit" class="btn btn-success" id="btn-submit" style="display:none"><i class="fa-solid fa-check"></i><span id="btn-submit-text">Register Client</span></button>
+          </div>
+        </form>
+      </section>
+      <!-- SETTINGS -->
+      <section id="view-settings" class="view">
+        <div class="view-header"><div><h2>Settings</h2><p class="view-subtitle">Portal configuration</p></div></div>
+        <div class="step-card"><h3><i class="fa-solid fa-server"></i>n8n Connection</h3><div class="form-grid"><div class="form-group full"><label for="settings-url">Webhook Base URL</label><input type="url" id="settings-url"></div></div>
+        <button class="btn btn-primary" onclick="saveSettings()" style="margin-top:16px"><i class="fa-solid fa-floppy-disk"></i>Save</button></div>
+      </section>
+    </main>
+  </div>
+  <div id="toast-container" class="toast-container"></div>
+  <div id="confirm-modal" class="modal-overlay" style="display:none"><div class="modal-card"><h3 id="modal-title">Confirm</h3><p id="modal-message">Are you sure?</p><div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-danger" id="modal-confirm-btn">Confirm</button></div></div></div>
+  <script src="app.js"></script>
+</body>
+</html>
